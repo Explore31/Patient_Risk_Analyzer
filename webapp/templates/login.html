@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}
+Predictive Risk Analyzer - Login
+{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+
+<script>
+  const LOGIN_URL = "{{ url_for('auth.login') }}";
+  const SUCCESS_URL = "{{ url_for('routes.patient_id') }}";
+</script>
+
+<body>
+  <div class="login-container">
+    <!-- Left Side: Image -->
+    {% set login_image_url = url_for('static', filename='images/login_image.jpg') %}
+    <div class="login-left" style="background-image: url('{{ login_image_url }}');">
+      <div class="hero-text">
+        <h1 class="hero-text-header">Predictive Risk Analyzer
+        </h1>
+        <p class="hero-text-subtext">
+          Analyze risks and gain insights into patient health instantly!
+        </p>
+      </div>
+    </div>
+
+    <!-- Right Side: Login Form -->
+
+    <div class="login-right">
+      <h2>Sign in to monitor!</h2>
+      <hr>
+      <form id="login-form" action="{{ url_for('auth.login') }}" method="POST" style="width: 90%;">
+        <div class="input-group">
+          <label for="email">Staff ID</label>
+          <input type="text" id="email" name="email" required>
+        </div>
+
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+
+        <button type="submit">Login</button>
+        <div id="error-message"></div>
+      </form>
+    </div>
+  </div>
+</body>
+
+<script src="{{ url_for('static', filename='js/login.js') }}"></script>
+
+{% endblock %}

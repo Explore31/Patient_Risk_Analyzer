@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}
+Predictive Risk Analyzer - Select Patient
+{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/select.css') }}">
+<script>
+    const PATIENT_URL = "{{ url_for('routes.patient_id') }}";
+</script>
+<script src="{{ url_for('static', filename='js/select-filter.js') }}"></script>
+<div id="patient-data" data-patients='[
+    {% for patient in patients %}
+        {"id": "{{ patient.id }}", "name": "{{ patient.name }}"}{% if not loop.last %},{% endif %}
+    {% endfor %}
+]'></div>
+
+<body>
+    <div class="select-container">
+        {% set select_image_url = url_for('static', filename='images/login_image.jpg') %}
+        <div class="select-left" style="background-image: url('{{ select_image_url }}');">
+            <div class="hero-text">
+                <h1 class="hero-text-header">Predictive Risk Analyzer
+                </h1>
+                <p class="hero-text-subtext">
+                    Analyze risks and gain insights into patient health instantly!
+                </p>
+            </div>
+        </div>
+
+        <!-- Right Side: Select Patient Form -->
+        <div class="select-right">
+            <h2>Select patient to monitor</h2>
+            <hr>
+            <form id="select-form" action="{{ url_for('routes.patient_id') }}" method="POST" style="width: 90%;">
+                <div class="input-group">
+                    <label for="patient_id">Enter PID</label>
+                    <input type="text" id="patient_id" name="patient_id" onkeyup="filterPatients('patient_id')">
+                    <div id="patient_id_dropdown" class="dropdown-content"></div>
+                </div>
+
+                <div class="or-text">OR</div>
+
+                <div class="input-group">
+                    <label for="patient_id">Enter Patient Name</label>
+                    <input type="text" id="patient_name" name="patient_name" onkeyup="filterPatients('patient_name')">
+                    <div id="patient_name_dropdown" class="dropdown-content"></div>
+                </div>
+
+                <button type="submit">Monitor</button>
+                {% if error %}
+                <div id="err-message">
+                    {{error}}
+                </div>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</body>
+{% endblock %}

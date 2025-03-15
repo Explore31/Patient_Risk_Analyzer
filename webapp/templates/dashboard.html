@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}Patient Dashboard{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+<section class="dashboard">
+    <div class="sidebar">
+        <div class="profile">
+            <img src="{{ url_for('static', filename='images/profileBlank.png') }}" alt="Profile Image">
+            <p><strong>{{ patient.name }}</strong></p>
+        </div>
+        <hr>
+        <div class="patient-info">
+            <p><strong>PID</strong> <span class="data">{{ patient.id }}</span></p>
+            <p><strong>Age</strong> <span class="data">{{ patient.age }}</span></p>
+            <p><strong>Gender</strong> <span class="data">{{ patient.gender }}</span></p>
+            <p><strong>Blood-group</strong> <span class="data">{{ patient.blood }}</span></p>
+        </div>
+        <div class="menu-links">
+            <a id="printReportBtn" href="#"><strong>Generate Report</strong></a>
+            <a href="{{ url_for('routes.patient_id') }}"><strong>Leave Page</strong></a>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="top-section">
+            <div class="gauge-container">
+                <div class="gauge-info">
+                    <h3>Temperature (°C)</h3>
+                    <div class="gauge-value" id="tempValue">--</div>
+                </div>
+                <div class="gauge">
+                    <canvas id="tempGauge"></canvas>
+                </div>
+            </div>
+
+            <div class="gauge-container">
+                <div class="gauge-info">
+                    <h3>Heart Rate (bpm)</h3>
+                    <div class="gauge-value" id="heartRateValue">--</div>
+                </div>
+                <div class="gauge">
+                    <canvas id="heartRateGauge"></canvas>
+                </div>
+            </div>
+
+            <div class="gauge-container">
+                <div class="gauge-info">
+                    <h3>Oxygen Saturation (%)</h3>
+                    <div class="gauge-value" id="oxygenValue">--</div>
+                </div>
+                <div class="gauge">
+                    <canvas id="oxygenGauge"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="risk-category-container">
+            <h3>Risk Category</h3>
+            <div class="risk-scale">
+                <div class="risk-marker" id="riskMarker">▲</div>
+            </div>
+            <div class="risk-label" id="riskLabel">--</div>
+        </div>
+
+        <div class="full-width chart-container">
+            <h3>Risk Score Over Time</h3>
+            <canvas id="riskScoreChart"></canvas>
+        </div>
+
+        <div class="full-width chart-container">
+            <h3>Risk Factors Distribution</h3>
+            <canvas id="riskFactorsBar"></canvas>
+        </div>
+
+        <div class="full-width chart-container">
+            <h3>Survival Probability Over Time</h3>
+            <canvas id="survivalProbability"></canvas>
+        </div>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
+<script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+    var latestPatientData = null;
+    sessionStorage.setItem("generate_id", "{{ user }}");
+    sessionStorage.setItem("gender", "{{ patient.gender }}");
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="{{ url_for('static', filename='js/report.js') }}"></script>
+
+{% endblock %}

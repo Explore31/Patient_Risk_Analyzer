@@ -1,0 +1,157 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+/* Login Container */
+.login-container {
+    display: flex;
+    width: 60%;
+    max-width: 800px;
+    background: #ffffff;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Left Side (Image) */
+.login-left {
+    width: 60%;
+    background: #8bbb6e;
+    display: flex;
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.login-left::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(31, 61, 16, 0.75);
+    /* 50% opacity overlay */
+    z-index: 1;
+}
+
+.hero-text {
+    flex: 1;
+    text-align: center;
+    padding: 50px 20px 40px 40px;
+    z-index: 2;
+}
+
+.hero-text-header {
+    font-size: 48px;
+    text-align: left;
+    margin-bottom: 20px;
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.hero-text-subtext {
+    font-size: 18px;
+    text-align: left;
+    margin-bottom: 60px;
+    margin-right: 60px;
+    line-height: 1.6;
+    color: #f2fceb;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+/* Right Side (Login Form) */
+.login-right {
+    width: 40%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #698e53;
+}
+
+hr {
+    border: none;
+    height: 3px;
+    background-color: #8bbb6e;
+    width: 90%;
+    margin-bottom: 20px;
+}
+
+
+/* Input Group */
+.input-group {
+    width: 100%;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+.input-group label {
+    display: block;
+    /* font-weight: bold; */
+    margin-bottom: 5px;
+    color: #203213;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Login Button */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #8bbb6e;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    margin-top: 10px;
+    transition: background 0.2s ease-in-out;
+}
+
+button:hover {
+    background-color: #77a15b;
+}
+
+#error-message {
+    color: rgb(159, 35, 35);
+    text-align: center;
+    margin-top: 2px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .login-container {
+        flex-direction: column;
+        width: 90%;
+    }
+
+    .login-left,
+    .login-right {
+        width: 100%;
+    }
+
+    .login-left img {
+        height: 200px;
+    }
+}
