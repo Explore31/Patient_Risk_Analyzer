@@ -108,7 +108,19 @@ function updateChart(canvasId, type, data, labels = ["Data"]) {
         },
         options: {
             responsive: true,
-            maintainAspectRatio: false
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false  // Hide legend
+                },
+                tooltip: {
+                    callbacks: {
+                        title: function () {
+                            return "";  // Remove tooltip title
+                        }
+                    }
+                }
+            }
         }
     });
 }
@@ -121,7 +133,7 @@ function createLineChart(canvasId, label, dataStore) {
         data: {
             labels: dataStore.labels,
             datasets: [{
-                label: label,
+                label: "",
                 data: dataStore.values,
                 borderColor: "rgb(56, 84, 46)",
                 fill: false,
@@ -131,6 +143,18 @@ function createLineChart(canvasId, label, dataStore) {
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false  // Hide legend
+                },
+                tooltip: {
+                    callbacks: {
+                        title: function () {
+                            return "";  // Remove tooltip title
+                        }
+                    }
+                }
+            },
             scales: {
                 x: {
                     title: {

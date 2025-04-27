@@ -1,4 +1,4 @@
 instance/
-ml_models/
+# ml_models/
 projvenv/
 __pycache__/

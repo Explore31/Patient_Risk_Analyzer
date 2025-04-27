@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bootstrap-4@5/bootstrap-4.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/add.css') }}">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    const SUCCESS_URL = "{{ url_for('routes.patient_id') }}";
+  </script>
+
+
+<div class="add-patient-container">
+    <h2 class="section-title">Add New Patient</h2>
+
+    <div class="section-divider-header"></div>
+
+    <form id="addPatientForm" method="POST" action="{{ url_for('routes.add_patient') }}">
+        <!-- Section 1 -->
+        <div class="inline-group mb-4">
+            <div class="form-group">
+                <label for="name" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="age" class="form-label">Age</label>
+                <input type="number" class="form-control" id="age" name="age" required>
+            </div>
+            <div class="form-group">
+                <label for="gender" class="form-label">Gender</label>
+                <select class="form-select" id="gender" name="gender" required>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- Section 2 -->
+        <div class="inline-group mb-4">
+            <div class="form-group">
+                <label for="weight" class="form-label">Weight (kg)</label>
+                <input type="number" class="form-control" id="weight" name="weight" step="0.1" required>
+            </div>
+            <div class="form-group">
+                <label for="height" class="form-label">Height (m)</label>
+                <input type="number" class="form-control" id="height" name="height" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="blood_group" class="form-label">Blood Group</label>
+                <input type="text" class="form-control" id="blood_group" name="blood_group" required>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- Section 3 -->
+        <div class="mb-4">
+            <label for="medical_history" class="form-label">Medical History</label>
+            <textarea class="form-control" id="medical_history" name="medical_history" rows="4"
+                placeholder="e.g., Heart Disease, Diabetes"></textarea>
+        </div>
+
+        <div class="button-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="reset" class="btn btn-secondary">Clear</button>
+        </div>
+    </form>
+</div>
+
+<script src="{{ url_for('static', filename='js/add.js') }}"></script>
+
+{% endblock %}
